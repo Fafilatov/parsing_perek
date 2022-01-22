@@ -65,33 +65,6 @@ for product_name in list_for_find:
             print('Except, итерация', m)  # до сих
     time.sleep(1)
 
-    # try:
-    #     elems_filter = driver.find_elements(By.CLASS_NAME, 'xf-filter-section-item__text')
-    #     print('Ищем по 1 фильтру из', str(len(elems_filter)), 'вариантов')
-    #     elem_f = elems_filter[0]
-    #     elem_f.click()
-    # except:
-    #     elems_buttom = driver.find_elements(By.CLASS_NAME,
-    #                                         "xfnew-search-results--new__more-wrap")  # нажимает кнопку поискаааа!!!
-    #     # от сих                             xfnew-search-results--new__more-wrap
-    #     m = 0
-    #     print('Начали искать кнопку для поиска')
-    #     for elem_b in elems_buttom:
-    #         m += 1
-    #         try:
-    #             elem_b.click()
-    #             driver.execute_script("window.scrollTo(0, document.body.scrollUp);")
-    #             print('Ok, итерация', m)
-    #             break
-    #         except:
-    #             print('Except, итерация', m)  # до сих
-    #     time.sleep(1)
-
-        # elems_filter = driver.find_elements(By.CLASS_NAME, 'xf-filter-section-item__text')
-        # print('Ищем по 1 фильтру из', str(len(elems_filter)), 'вариантов')
-        # elem_f = elems_filter[0]
-        # elem_f.click()
-
     html = driver.find_element(By.TAG_NAME, 'html')
     for _ in range(random.randint(10, 15)):
         html.send_keys(Keys.PAGE_DOWN)  # мотает страничку вниз
