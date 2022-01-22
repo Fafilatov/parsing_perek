@@ -1,4 +1,4 @@
-# https://hh.ru/vacancy/49183752?from=vacancy_search_list
+# пробежаться по папкам включая вложенные и во всех .txt файлах мнее 2000 вписать свои ФИО на первую строку
 import os
 
 
@@ -17,7 +17,4 @@ for dir, subdir, files in os.walk("F:\\"):
 
         except:
             continue
-
-            # title = div.find('a', attrs={'data-qa': 'vacancy-serp__vacancy-title'}).text - так
-            # можно??
 
