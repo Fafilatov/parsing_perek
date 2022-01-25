@@ -42,7 +42,7 @@ def following_links(url):
     options.add_argument("start-maximized")
     # options.add_argument("--headless")
     driver = webdriver.Chrome(options=options,
-                              executable_path=r"C:\Users\fafil\Crome_driver_selenium\chromedriver.exe")
+                              executable_path=r"C:\Users\fafil\Chrome_driver_selenium\chromedriver.exe")
     driver.get(url=url)
 
     html = driver.page_source

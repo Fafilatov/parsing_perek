@@ -11,7 +11,7 @@ import os
 #                  'чай', 'помидоры', 'Кетчуп', 'Вода', 'Чипсы', 'Зубная паста', 'Какао', 'Лечо', 'икра кабачковая',
 #                  'творог', 'Свинина', 'Сардельки', 'Овощная смесь', 'Шоколад', 'Сыр', 'Порошок стиральный', 'Пельмени',
 #                  'Блины', 'Пиво']
-list_for_find = ['творог рассыпчатый']
+list_for_find = ['творог рассыпчатый', 'Чипсы', 'Зубная паста']
 url = "https://www.vprok.ru/"
 date = datetime.datetime.now()
 date_now = date.strftime("%m-%d")
@@ -25,13 +25,12 @@ if not os.path.isdir(os.getcwd() + '\\data\\' + date_now + '\\index\\'):
 
 options = webdriver.ChromeOptions()
 options.add_argument("start-maximized")
-options.add_argument("--headless")
+# options.add_argument("--headless")
 
 driver = webdriver.Chrome(options=options,
                           executable_path=r"C:\Users\fafil\Chrome_driver_selenium\chromedriver.exe")
 
 driver.get(url=url)  # Открываем страницу
-elem = ''
 
 for product_name in list_for_find:
     elems = driver.find_elements(By.TAG_NAME, "input")  # вписывает в поисковую строкуууу!!! от сих
@@ -41,29 +40,26 @@ for product_name in list_for_find:
         try:
             elem.send_keys((product_name, Keys.ARROW_DOWN))
             driver.execute_script("window.scrollTo(0, document.body.scrollUp);")
-            print('Ok, итерация', n)
+            print('Успешная попытка номер', n, ' вписать ', product_name, ' в строку поиска')
             break
         except:
-            print('Except, итерация', n)  # до сих
-
-    print('Ввели слово для поиска')
-
-    time.sleep(1)
+            print('Неудачная попытка номер', n, ' вписать ', product_name, ' в строку поиска')  # до сих
+    time.sleep(3/2)
 
     elems_buttom = driver.find_elements(By.CLASS_NAME,
-                                        "xfnew-header-search-bar--new__img")  # нажимает кнопку поискаааа!!! от сих
-    m = 0                              #
+                                        "xfnew-search-results--new__more")  # нажимает кнопку поискаааа!!! от сих
+    n = 0
     print('Начали искать кнопку для поиска')
     for elem_b in elems_buttom:
-        m += 1
+        n += 1
         try:
             elem_b.click()
             driver.execute_script("window.scrollTo(0, document.body.scrollUp);")
-            print('Ok, итерация', m)
+            print('Успешно кликнули на кнопку поиска со словом', product_name, ' с попытки номер ', n)
             break
         except:
-            print('Except, итерация', m)  # до сих
-    time.sleep(1)
+            print('Не успешно кликнули на кнопку поиска с попытки номер ', n)  # до сих
+    time.sleep(3)
 
     html = driver.find_element(By.TAG_NAME, 'html')
     for _ in range(random.randint(10, 15)):
@@ -82,13 +78,12 @@ for product_name in list_for_find:
             try:
                 elem.send_keys((Keys.CONTROL + "a"))
                 elem.send_keys(Keys.DELETE)
+
                 driver.execute_script("window.scrollTo(0, document.body.scrollUp);")
-                print('Ok, итерация', n)
+                print('Успешно удалили слово для поиска с попытки номер', n)
                 break
             except:
-                print('Except, итерация', n)  # до сих
-
-        print('Удалили слово для поиска')
+                print('Не успешно удалили слово для поиска с попытки номер', n)  # до сих
 
 driver.close()
 driver.quit()

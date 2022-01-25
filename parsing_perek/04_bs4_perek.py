@@ -7,11 +7,13 @@ import os
 
 date = datetime.datetime.now()
 date_now = date.strftime("%m-%d")
+time_now = date.strftime("%H-%M")
 file_reference_input = os.getcwd() + '\\data\\' + date_now + '\\index\\'
 file_reference_output = os.getcwd() + '\\data\\' + date_now + '\\'
 
 # Ниже создаем таблицу с заголовками
-with open(file_reference_output + 'processed.csv', 'w', newline="") as csvfile:
+file_directory_and_name_csv_table = file_reference_output + 'processed_' + time_now + '.csv'
+with open(file_directory_and_name_csv_table, 'w', newline="") as csvfile:
     writer = csv.writer(csvfile, delimiter=";")
     writer.writerow(["Keyword", "Наименование", "Актуальная цена ", "Цена указана за", "Грамм (только для 'творог рассыпчатый'!!!)"])
 
@@ -41,7 +43,7 @@ for keyword in os.listdir(file_reference_input):
             print("Это тег highlight, в нем", item.defining_length_price(), "значений")
             print("Его цена", item.defining_price(), ", его стоимость указана за", item.defining_unit())
 
-            with open(file_reference_output + 'processed.csv', 'a', newline="") as csvfile:
+            with open(file_directory_and_name_csv_table, 'a', newline="") as csvfile:
                 writer = csv.writer(csvfile, delimiter=";")
                 writer.writerow([keyword[21:-5], item.name, item.defining_price(), item.defining_unit(), item.curd()])
 
@@ -52,7 +54,7 @@ for keyword in os.listdir(file_reference_input):
                 print("Это тег highlight, в нем", item.defining_length_price(), "значений")
                 print("Его цена", item.defining_price(), ", его стоимость указана за", item.defining_unit())
 
-                with open(file_reference_output + 'processed.csv', 'a', newline="") as csvfile:
+                with open(file_directory_and_name_csv_table, 'a', newline="") as csvfile:
                     writer = csv.writer(csvfile, delimiter=";")
                     writer.writerow([keyword[21:-5], item.name, item.defining_price(), item.defining_unit(), item.curd()])
 
